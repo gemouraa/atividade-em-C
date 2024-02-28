@@ -1,6 +1,9 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include <locale.h>
 
 int main() {
+	setlocale(LC_ALL,"");
 	char nome[200];
 	char sexo;
 	int idade;
