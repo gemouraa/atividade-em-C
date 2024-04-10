@@ -1,45 +1,62 @@
-#include <stdlib.h>
 #include <stdio.h>
 #include <locale.h>
-
-void cabecalho (){
+#include <stdlib.h>
+#include <ctype.h>
+#define TAM 3
+void cabecalho () {
 	system("cls || clear");
-	printf("=====SENAI=====\n");
+	printf("\n=== SENAI ===\n");
+	fflush(stdin);
+}  
+int main () {
+	setlocale(LC_ALL, "");
+	char disciplina[TAM][200];
+	float numeros[TAM][TAM],media[TAM],soma = 0, peso[3], somaTotal = 0, somaPeso = 0, multi = 0;
+	int l,c,p;
+	
+	cabecalho();
+	for(l = 0;l < TAM;l++){
+		printf("Digite o nome da %d disciplina:",l + 1);
+		scanf("%s",&disciplina[l]);
+		for(c = 0;c < TAM;c++){
+		    printf("Coloque a %dº Nota:",c+1);
+			scanf("%f",&numeros[l][c]);
+			while(numeros[l][c] < 0 || numeros[l][c] > 10){
+		    printf("Número Invalido\n");
+			printf("Coloque a %dº Nota:",c+1);
+			scanf("%f",&numeros[l][c]);
+			}
+			printf("Digite o peso da prova:",p+1);
+			scanf("%f",&peso[c]);
+			while(peso[c] < 0 || peso[c] > 10){
+			printf("Número Invalido\n");
+			printf("Digite o peso da prova:",p+1);
+			scanf("%f",&peso[c]);
+			}
+			multi = numeros[l][c] * peso[c];
+			somaTotal += multi;
+			somaPeso += peso[c];
 }
+		
+	    	media[l] = somaTotal / somaPeso;	
+	    	somaTotal = 0;
+	    	somaPeso = 0;
+	    	multi = 0;
+	}  
 
-int main() {
-	setlocale(LC_ALL,"");
-	int primeiroNumero, segundoNumero, media, menorValor, maiorValor, produto;
-	
-	//eleborando as perguntas
+	printf("\n");
 	cabecalho();
-	printf("Digite o primeiro número:");
-	scanf("%i",&primeiroNumero);
+	for(l = 0;l < TAM;l++){
+		printf("%dº Disciplina: %s\n",l+1,disciplina[l]);
+		for(c = 0;c < TAM;c++){
+			printf("%dºNota: %.1f\n",c+1, numeros[l][c]);
+			
+		}
+		printf("Média: %.1f \n",media[l]);
 	
-	cabecalho();
-	printf("Digite o segundo número:");
-	scanf("%i",&segundoNumero);
-	
-	//calculos
-	
-	media = (primeiroNumero + segundoNumero) / 2;
-	
-	produto = primeiroNumero * segundoNumero;
-	
-	if (primeiroNumero > segundoNumero){
-		maiorValor = primeiroNumero;
-		menorValor = segundoNumero;
+		printf("\n");
 	}
-	if (segundoNumero < primeiroNumero){
-		maiorValor = primeiroNumero;
-		menorValor = segundoNumero;
-	}
-	cabecalho();
-	printf("Primeiro Número: %.0i ", primeiroNumero);
-	printf("\nSegundo Número: %.0i \n", segundoNumero);
-	printf("\nMedia: %.1i", media);
-	printf("\nProduto: %.1i", produto);
-	printf("\nMaior Valor: %.1i", maiorValor);
-	printf("\nMenor Valor: %.1i", menorValor);
 	
+
+	return 0;
 }
